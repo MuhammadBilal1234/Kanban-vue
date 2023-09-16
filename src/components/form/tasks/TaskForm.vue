@@ -110,6 +110,20 @@ const FormBuilder = [
   },
   {
     props: {
+      name: "estimated_date",
+      type: "datetime-local",
+      label: "Estimated Time",
+      placeholder: "Estimated Time",
+      disabled: false,
+      required: true,
+      // value: new Date(),
+      value: props.edit ? props.task.estimated_date : new Date(),
+    },
+    component: TextField,
+    display: true,
+  },
+  {
+    props: {
       name: "status",
       type: "text",
       label: "Status",
@@ -174,7 +188,7 @@ const DatePickerFormBuilder = [
           </template>
           <FileInput @update:file="updateFile" :file="task?.files" />
         </main>
-        <main>
+        <!-- <main>
           <template v-for="item in DatePickerFormBuilder">
             <component
               v-if="item.display"
@@ -184,7 +198,7 @@ const DatePickerFormBuilder = [
               }"
             />
           </template>
-        </main>
+        </main> -->
       </div>
     </v-card-text>
     <v-card-actions class="flex my-5 items-center justify-center">
