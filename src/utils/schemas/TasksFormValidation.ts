@@ -14,6 +14,6 @@ export const ValidationSchema = Yup.object().shape({
     .trim()
     .required("Description is Required")
     .min(2, "Description must be at least 2 characters")
-    .max(100, "Description must be at most 100 characters"),
+    .max(250, "Description must be at most 250 characters"),
   status: Yup.string().trim().required("Status is Required"),
 });

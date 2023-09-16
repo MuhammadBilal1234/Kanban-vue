@@ -11,12 +11,10 @@ const showModal = ref<Boolean>(false);
 const taskStore = useTasksStore();
 
 const task = taskStore.tasks.find((i) => i.id == route.params.taskid);
-console.log({ task });
 
 watch(
   () => route.meta,
   (newVal) => {
-    console.log({ newVal });
     if (newVal && newVal.showModal) {
       showModal.value = !!newVal.showModal;
     }

@@ -28,7 +28,6 @@ watch(files, (newVal, _) => {
 watch(
   () => props.file,
   (newVal, _) => {
-    console.log({ newVal });
     if (newVal?.name) {
       files.value = [newVal];
       url.value = URL.createObjectURL(newVal);

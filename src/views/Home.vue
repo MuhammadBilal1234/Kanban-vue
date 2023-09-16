@@ -19,7 +19,6 @@ function closeTaskDailog(value) {
 
 function closeFilterDailog(value) {
   showFilterDailog.value = value;
-  // taskStore.resetDateFilter();
   uniqueKey.value++;
 }
 </script>
@@ -41,6 +40,18 @@ function closeFilterDailog(value) {
       </div>
 
       <div class="flex space-x-3">
+        <div
+          class="flex space-x-2 items-center"
+          v-if="taskStore.startDate && taskStore.endDate"
+        >
+          <v-chip>
+            {{ taskStore.startDate.toISOString().split("T")[0] }}
+          </v-chip>
+          <p class="flex items-center">To</p>
+          <v-chip>
+            {{ taskStore.endDate.toISOString().split("T")[0] }}
+          </v-chip>
+        </div>
         <v-btn
           variant="outlined"
           prepend-icon="mdi-feature-search-outline"

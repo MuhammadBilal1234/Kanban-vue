@@ -2,31 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
 import type { Task } from "@/types/task";
 import { matchSorter } from "match-sorter";
-
-function findBoardProgressInPercentage(done: number, total: number) {
-  const percentage = (done / total) * 100;
-  return !isNaN(percentage) ? percentage.toFixed() : 0;
-}
-
-function filterByDateRange(
-  arrayOfObjects: Task[],
-  startDate: Date,
-  endDate: Date
-) {
-  const startDateObj = new Date(startDate);
-  const endDateObj = new Date(endDate);
-
-  startDateObj.setHours(0, 0, 0, 0);
-  endDateObj.setHours(0, 0, 0, 0);
-
-  const filteredArray = arrayOfObjects.filter((item) => {
-    const estimatedDate = new Date(item.estimated_date);
-    estimatedDate.setHours(0, 0, 0, 0);
-    return estimatedDate >= startDateObj && estimatedDate <= endDateObj;
-  });
-
-  return filteredArray;
-}
+import { filterByDateRange, findBoardProgressInPercentage } from "@/utils";
 
 export const useTasksStore = defineStore("tasks", () => {
   // State
@@ -67,7 +43,7 @@ export const useTasksStore = defineStore("tasks", () => {
     const temp = filteredTasks
       .filter((t) => t.status == "Pending")
       .sort((a, b) => a.sortOrder - b.sortOrder);
-    console.log(temp);
+
     return temp;
   });
 
@@ -159,7 +135,6 @@ export const useTasksStore = defineStore("tasks", () => {
   }
 
   function editTask(payload: Task, oldTask: Task) {
-    console.log({ payload, oldTask });
     const newTasks = [...tasks.value].map((tk) => {
       if (tk.id == oldTask.id) {
         return {
@@ -169,8 +144,8 @@ export const useTasksStore = defineStore("tasks", () => {
         };
       } else return tk;
     });
+    //@ts-ignore
     tasks.value = newTasks;
-    console.log(newTasks);
   }
 
   function deleteTask(id: string) {

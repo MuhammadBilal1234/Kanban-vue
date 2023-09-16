@@ -13,7 +13,6 @@ const props = defineProps({
 
 
 watch(() => props.task , (newVal , _) => {
-    console.log(newVal)
   if(newVal?.files?.name) {
     url.value = URL.createObjectURL(newVal.files)
   }
@@ -63,10 +62,10 @@ watch(() => props.task , (newVal , _) => {
         </p>
       </p>
       
-      <p class="font-semibold text-lg">Labels : </p>
+      <p class="font-semibold text-lg" v-if="task?.tags?.length > 0">Labels : </p>
       <template v-for="tag in task?.tags" class="mt-2" >
 
-        <v-chip class="mr-1">
+        <v-chip class="mr-1" >
           {{ tag }}
         </v-chip>
       </template>

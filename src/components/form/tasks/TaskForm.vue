@@ -11,7 +11,6 @@ import { STATUS, TAGS } from "../../../constants/status";
 import { generateUniqueId } from "../../../utils";
 import { useTasksStore } from "../../../stores/Tasks";
 import { ValidationSchema } from "../../../utils/schemas/TasksFormValidation";
-import type { Task } from "@/types/task";
 
 const taskStore = useTasksStore();
 
@@ -26,8 +25,6 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["action:close-dailog"]);
-
-console.log(props.task);
 
 const { handleSubmit, errors, handleReset, resetForm } = useForm({
   validationSchema: ValidationSchema,
@@ -54,8 +51,6 @@ function updateFile(val) {
 }
 
 const onSubmit = handleSubmit((values) => {
-  console.log(values, file);
-
   const payload: any = {
     id: generateUniqueId(),
     ...values,
@@ -165,7 +160,7 @@ const DatePickerFormBuilder = [
 <template>
   <form class="form" @submit="onSubmit" @reset="handleReset">
     <v-card-text>
-      <div class="flex gap-4 flex-col sm:flex-row">
+      <div class="flex gap-8 flex-col sm:flex-row">
         <main class="flex-1">
           <template v-for="item in FormBuilder">
             <component

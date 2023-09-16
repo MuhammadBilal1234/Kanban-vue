@@ -25,8 +25,6 @@ const props = defineProps({
 const drag = ref(false);
 
 function updateTaskList(list) {
-  console.log({ list });
-
   if (list.moved) {
     const { newIndex, oldIndex, element } = list.moved;
 
@@ -46,7 +44,6 @@ function updateTaskList(list) {
       if (tk.id == element.id) tk.status = props.status;
     });
   }
-  console.log(taskStore.tasks);
 }
 
 function itemKeys(item) {

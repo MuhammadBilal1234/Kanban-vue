@@ -17,7 +17,6 @@ const endDate = ref(new Date());
 const error = ref("");
 
 function submit() {
-  console.log({ endDate, startDate });
   if (endDate.value < startDate.value) {
     return (error.value = "End date Must be Greater then Start Date");
   } else {
