@@ -8,6 +8,16 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: Home,
+      children: [
+        {
+          path: ":taskid",
+          props: true,
+          component: () => import("@/components/tasks/edit-task-dailog.vue"),
+          meta: {
+            showModal: true,
+          },
+        },
+      ],
     },
     // {
     //   path: "/about",

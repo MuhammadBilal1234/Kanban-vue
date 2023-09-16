@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { useTasksStore } from "@/stores/Tasks";
 
-const power = ref(20);
-setInterval(() => {
-  power.value++;
-}, 1000);
+const taskStore = useTasksStore();
 </script>
 
 <template>
@@ -15,12 +12,12 @@ setInterval(() => {
       Progress
     </h3>
     <v-progress-linear
-      v-model="power"
-      color="amber"
+      :model-value="taskStore.progressBarPercentage"
+      color="success"
       height="30"
       class="rounded-md"
     >
-      <strong>{{ Math.ceil(power) }}%</strong>
+      <strong class="text-white">{{ taskStore.progressBarStatus }}</strong>
     </v-progress-linear>
   </div>
 </template>
